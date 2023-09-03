@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Lista de Vuelos</title>
+</head>
+<body>
+    <h1>Hola, aquí está la lista de vuelos en la base de datos:</h1>
+
+    <a href="Controlador?accion=addv">Agregar</a>
+    <br><br>
+    <table>
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Precio</th>
+                <th>Fecha de salida</th>
+                <th>Duración del viaje</th>
+                <th>País de salida</th>
+                <th>Ciudad de salida</th>
+                <th>País de llegada</th>
+                <th>Ciudad de llegada</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%                
+                VueloDAO vuedao = new VueloDAO();
+                List<Vuelo> list = vuedao.listar();
+                for (Vuelo vue : list) {
+            %>
+            <tr>
+                <td><%=vue.getIdv()%></td>
+                <td><%=vue.getPrecio()%></td>
+                <td><%=vue.getFsalida()%></td>
+                <td><%=vue.getDuracion()%></td>
+                <td><%=vue.getPsalida()%></td>
+                <td><%=vue.getCsalida()%></td>
+                <td><%=vue.getPllegada()%></td>
+                <td><%=vue.getCllegada()%></td>
+                <td>
+                    <a href="Controlador?accion=editarv&idv=<%= vue.getIdv()%>">Editar</a>
+                    <a href="Controlador?accion=eliminav&idv=<%= vue.getIdv()%>">Eliminar</a>
+                </td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+</body>
+</html>
